@@ -9,6 +9,7 @@ app.on("ready", () => {
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: getPreloadPath(),
+      devTools: isDev() ?? false,
     },
   });
   if (isDev()) {
@@ -16,6 +17,7 @@ app.on("ready", () => {
   } else {
     mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
   }
+  mainWindow.setMenuBarVisibility(false);
 });
 
 app.on("window-all-closed", () => {
